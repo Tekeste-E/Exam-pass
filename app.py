@@ -15,7 +15,7 @@ from pathlib import Path
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # ── Config ──────────────────────────────────────────────────────────────────
 UPLOAD_FOLDER = Path("uploads")
@@ -168,10 +168,9 @@ SUBJECTS = {
 # ═══════════════════════════════════════════════════════════════════════════════
 #  ROUTES — Pages
 # ═══════════════════════════════════════════════════════════════════════════════
-
 @app.route("/")
 def index():
-    return render_template("index.html", subjects=SUBJECTS)
+    return jsonify({"status": "EUEE Study Hub API is running", "version": "1.0"})
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
